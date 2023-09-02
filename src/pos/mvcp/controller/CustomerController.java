@@ -124,4 +124,20 @@ public class CustomerController {
             return "Fail" ;
            }  
     }
+
+    public String deleteCustomer(String custId) throws ClassNotFoundException, SQLException {
+        
+        Connection connection = DBConnection.getInstance().getConnection();
+        
+        String query = "DELETE FROM Customer WHERE CustID=?";
+        
+       PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, custId);
+        
+        if(statement.executeUpdate() > 0){
+            return "Success";
+           }else{
+            return "Fail" ;
+           }  
+    }
 }
