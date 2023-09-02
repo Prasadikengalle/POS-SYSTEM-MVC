@@ -4,6 +4,8 @@
  */
 package pos.mvcp;
 
+import pos.mvcp.view.CustomerView;
+
 /**
  *
  * @author Prasadi
@@ -14,7 +16,7 @@ public class PosMvcp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello");
+        new CustomerView().setVisible(true);
     }
     
 }
