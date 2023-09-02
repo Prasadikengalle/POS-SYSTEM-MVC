@@ -4,16 +4,26 @@
  */
 package pos.mvcp.view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import pos.mvcp.controller.CustomerController;
+import pos.mvcp.model.CustomerModel;
+
 /**
  *
  * @author Prasadi
  */
 public class CustomerView extends javax.swing.JFrame {
 
+    private CustomerController customerController;
+
     /**
      * Creates new form CustomerView
      */
     public CustomerView() {
+        customerController = new CustomerController();
         initComponents();
     }
 
@@ -290,7 +300,7 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_custZipTextActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-
+        saveCustomer();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
@@ -363,4 +373,33 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JButton updateButton;
     private javax.swing.JButton updateButton1;
     // End of variables declaration//GEN-END:variables
+
+    private void saveCustomer() {
+
+        CustomerModel customer = new CustomerModel(
+                custIdText.getText(),
+                custTitleText.getText(),
+                custNameText.getText(),
+                custDobText.getText(),
+                Double.parseDouble(custSalaryText.getText()),
+                custAddressText.getText(),
+                custCityText.getText(),
+                custProvinceText.getText(),
+                custZipText.getText());
+
+        System.out.println(customer.toString());
+
+        try {
+            String resp = customerController.saveCustomer(customer);
+            JOptionPane.showMessageDialog(this, resp);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            
+            
+        }
+        
+        
+
+    }
 }
