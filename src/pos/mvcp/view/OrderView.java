@@ -76,6 +76,7 @@ public class OrderView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         itemTable = new javax.swing.JTable();
         placeOrderButton = new javax.swing.JButton();
+        menuButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -249,6 +250,14 @@ public class OrderView extends javax.swing.JFrame {
             }
         });
 
+        menuButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menuButton3.setText("Menu");
+        menuButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
         tablePanel.setLayout(tablePanelLayout);
         tablePanelLayout.setHorizontalGroup(
@@ -259,6 +268,8 @@ public class OrderView extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(menuButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(placeOrderButton)
                 .addGap(23, 23, 23))
         );
@@ -268,7 +279,9 @@ public class OrderView extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(placeOrderButton)
+                .addGroup(tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(placeOrderButton)
+                    .addComponent(menuButton3))
                 .addContainerGap(564, Short.MAX_VALUE))
         );
 
@@ -334,6 +347,11 @@ public class OrderView extends javax.swing.JFrame {
         placeOrder();
     }//GEN-LAST:event_placeOrderButtonActionPerformed
 
+    private void menuButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButton3ActionPerformed
+        new MenuView().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_menuButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -355,6 +373,7 @@ public class OrderView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton menuButton3;
     private javax.swing.JLabel orderIdLabel;
     private javax.swing.JTextField orderIdText;
     private javax.swing.JButton placeOrderButton;

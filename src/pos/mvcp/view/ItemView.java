@@ -57,6 +57,7 @@ public class ItemView extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
         updateButton1 = new javax.swing.JButton();
+        menuButton2 = new javax.swing.JButton();
         tablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         itemTable = new javax.swing.JTable();
@@ -137,12 +138,22 @@ public class ItemView extends javax.swing.JFrame {
             }
         });
 
+        menuButton2.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        menuButton2.setText("Menu");
+        menuButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout customerPanelLayout = new javax.swing.GroupLayout(customerPanel);
         customerPanel.setLayout(customerPanelLayout);
         customerPanelLayout.setHorizontalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(menuButton2)
+                .addGap(18, 18, 18)
                 .addComponent(updateButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(updateButton)
@@ -172,7 +183,7 @@ public class ItemView extends javax.swing.JFrame {
                             .addGroup(customerPanelLayout.createSequentialGroup()
                                 .addComponent(unitPriceText, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(312, Short.MAX_VALUE))
         );
         customerPanelLayout.setVerticalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +212,8 @@ public class ItemView extends javax.swing.JFrame {
                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(updateButton)
-                    .addComponent(updateButton1))
+                    .addComponent(updateButton1)
+                    .addComponent(menuButton2))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -302,6 +314,11 @@ public class ItemView extends javax.swing.JFrame {
         searchItem();
     }//GEN-LAST:event_itemTableMouseClicked
 
+    private void menuButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButton2ActionPerformed
+      new MenuView().setVisible(true);
+      dispose();
+    }//GEN-LAST:event_menuButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,6 +335,7 @@ public class ItemView extends javax.swing.JFrame {
     private javax.swing.JTable itemTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton menuButton2;
     private javax.swing.JLabel packSizeLabel;
     private javax.swing.JTextField packSizeText;
     private javax.swing.JLabel qohLabel;

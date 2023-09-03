@@ -64,6 +64,7 @@ public class CustomerView extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
         updateButton1 = new javax.swing.JButton();
+        menuButton1 = new javax.swing.JButton();
         tablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTable = new javax.swing.JTable();
@@ -162,12 +163,22 @@ public class CustomerView extends javax.swing.JFrame {
             }
         });
 
+        menuButton1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        menuButton1.setText("Menu");
+        menuButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout customerPanelLayout = new javax.swing.GroupLayout(customerPanel);
         customerPanel.setLayout(customerPanelLayout);
         customerPanelLayout.setHorizontalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(menuButton1)
+                .addGap(39, 39, 39)
                 .addComponent(updateButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(updateButton)
@@ -252,7 +263,8 @@ public class CustomerView extends javax.swing.JFrame {
                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(updateButton)
-                    .addComponent(updateButton1))
+                    .addComponent(updateButton1)
+                    .addComponent(menuButton1))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -357,6 +369,11 @@ public class CustomerView extends javax.swing.JFrame {
         searchCustomer();
     }//GEN-LAST:event_customerTableMouseClicked
 
+    private void menuButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButton1ActionPerformed
+       new MenuView().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_menuButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -418,6 +435,7 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton menuButton1;
     private javax.swing.JPanel tablePanel;
     private javax.swing.JButton updateButton;
     private javax.swing.JButton updateButton1;

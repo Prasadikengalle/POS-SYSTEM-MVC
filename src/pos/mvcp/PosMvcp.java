@@ -6,6 +6,7 @@ package pos.mvcp;
 
 import pos.mvcp.view.CustomerView;
 import pos.mvcp.view.ItemView;
+import pos.mvcp.view.MenuView;
 import pos.mvcp.view.OrderView;
 
 /**
@@ -18,9 +19,11 @@ public class PosMvcp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        new MenuView().setVisible(true);
       //  new CustomerView().setVisible(true);
     //  new ItemView().setVisible(true);
-        new OrderView().setVisible(true);
+    //    new OrderView().setVisible(true);
     }
     
 }
