@@ -291,11 +291,11 @@ public class ItemView extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-
+        updateItem();
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void updateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton1ActionPerformed
-
+        deleteItem();
     }//GEN-LAST:event_updateButton1ActionPerformed
 
     private void itemTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemTableMouseClicked
@@ -333,23 +333,23 @@ public class ItemView extends javax.swing.JFrame {
 
         try {
             String[] columns = {"Code", "Description", "Pack Size", "Unit Price", "Quantity"};
-            
+
             DefaultTableModel dtm = new DefaultTableModel(columns, 0) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
-                
+
             };
-            
+
             itemTable.setModel(dtm);
-            
+
             ArrayList<ItemModel> items = itemController.getAllItems();
-            
+
             for (ItemModel item : items) {
                 Object[] rowData = {item.getItemCode(), item.getDescription(), item.getPackSize(), item.getUnitPrice(), item.getQoh()};
                 dtm.addRow(rowData);
-                
+
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ItemView.class.getName()).log(Level.SEVERE, null, ex);
@@ -364,8 +364,60 @@ public class ItemView extends javax.swing.JFrame {
                     packSizeText.getText(),
                     Double.parseDouble(unitPriceText.getText()),
                     Integer.parseInt(qohText.getText()));
-            
-            String resp =  itemController.saveItem(itemModel);
+
+            String resp = itemController.saveItem(itemModel);
+            JOptionPane.showMessageDialog(this, resp);
+            clear();
+            loadAllItems();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ItemView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
+    }
+
+    private void clear() {
+        itemCodeText.setText("");
+        descriptionText.setText("");
+        packSizeText.setText("");
+        unitPriceText.setText("");
+        qohText.setText("");
+
+    }
+
+    private void searchItem() {
+
+        try {
+            String itemCode = itemTable.getValueAt(itemTable.getSelectedRow(), 0).toString();
+
+            ItemModel itemModel = itemController.searchItem(itemCode);
+
+            if (itemModel != null) {
+                itemCodeText.setText(itemModel.getItemCode());
+                descriptionText.setText(itemModel.getDescription());
+                packSizeText.setText(itemModel.getPackSize());
+                unitPriceText.setText(Double.toString(itemModel.getUnitPrice()));
+                qohText.setText(Integer.toString(itemModel.getQoh()));
+            } else {
+                JOptionPane.showMessageDialog(this, "Item Not Found");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ItemView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+
+    private void updateItem() {
+
+        try {
+            ItemModel itemModel = new ItemModel(itemCodeText.getText(),
+                    descriptionText.getText(),
+                    packSizeText.getText(),
+                    Double.parseDouble(unitPriceText.getText()),
+                    Integer.parseInt(qohText.getText()));
+
+            String resp = itemController.updateItem(itemModel);
             JOptionPane.showMessageDialog(this, resp);
             clear();
             loadAllItems();
@@ -374,37 +426,20 @@ public class ItemView extends javax.swing.JFrame {
             Logger.getLogger(ItemView.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-             
-    }
-    
-    private void clear(){
-        itemCodeText.setText("");
-        descriptionText.setText("");
-        packSizeText.setText("");
-        unitPriceText.setText("");
-        qohText.setText("");
-        
     }
 
-    private void searchItem() {
-        
+    private void deleteItem() {
         try {
-            String itemCode = itemTable.getValueAt(itemTable.getSelectedRow(), 0).toString();
-            
-            ItemModel itemModel = itemController.searchItem(itemCode);
-            
-            if(itemModel != null){
-                itemCodeText.setText(itemModel.getItemCode());
-                descriptionText.setText(itemModel.getDescription());
-                packSizeText.setText(itemModel.getPackSize());
-                unitPriceText.setText(Double.toString(itemModel.getUnitPrice()));
-                qohText.setText(Integer.toString(itemModel.getQoh()));
-            }else{ 
-                JOptionPane.showMessageDialog(this, "Item Not Found");
-            }
+            String itemCode = itemCodeText.getText();
+            String resp =  itemController.deleteItem(itemCode);
+            JOptionPane.showMessageDialog(this, resp);
+            clear();
+            loadAllItems();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ItemView.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
+    
+    
 }

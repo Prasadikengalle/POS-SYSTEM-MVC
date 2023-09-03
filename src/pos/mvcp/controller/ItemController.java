@@ -87,4 +87,42 @@ public class ItemController {
         return null;
     }
 
+    public String updateItem(ItemModel item) throws ClassNotFoundException, SQLException {
+
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String query = "UPDATE Item SET Description=?, PackSize=?,UnitPrice=?, QtyOnHand=? WHERE ItemCode=? ";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        preparedStatement.setString(5, item.getItemCode());
+        preparedStatement.setString(1, item.getDescription());
+        preparedStatement.setString(2, item.getPackSize());
+        preparedStatement.setDouble(3, item.getUnitPrice());
+        preparedStatement.setInt(4, item.getQoh());
+
+        if (preparedStatement.executeUpdate() > 0) {
+            return "Success";
+        } else {
+            return "fail";
+        }
+    }
+
+    public String deleteItem(String itemCode) throws ClassNotFoundException, SQLException {
+
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String query = "DELETE FROM Item WHERE ItemCode=? ";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        preparedStatement.setString(1, itemCode);
+
+        if (preparedStatement.executeUpdate() > 0) {
+            return "Success";
+        } else {
+            return "fail";
+        }
+    }
+
 }
